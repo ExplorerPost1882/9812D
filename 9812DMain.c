@@ -20,9 +20,45 @@ void doAutonomous()
 {
 	if(vexRT[Btn7R])
 	{
+ //go forward for three seconds
 		motor[right] = 127;
 		motor[left] = 127;
 		wait1Msec(3000);
+		motor[right] = 0;
+		motor[left] = 0;
+ //go left 90 degrees
+		motor[right] = 127;
+		motor[left] = 0;
+		wait1Msec(2500);
+		motor[right] = 0;
+		motor[left] = 0;
+ //go forward
+		motor[right] = 127;
+		motor[left] = 127;
+		wait1Msec(0500);
+		motor[right] = 0;
+		motor[left] = 0;
+ //go right 90 degrees
+		motor[right] = 0;
+		motor[left] = 127;
+		wait1Msec(0500);
+		motor[right] = 0;
+		motor[left] = 0;
+ //go forward
+		motor[right] = 127;
+		motor[left] = 127;
+		wait1Msec(0400);
+		motor[right] = 127;
+		motor[left] = 127;
+ //lift arm
+		motor[touchclaw] = 127;
+		wait1Msec(2000);
+		motor[touchclaw] = 0;
+ //use gear rail
+		motor[Hook] = 127;
+		wait1Msec(2000);
+		motor[Hook] = 0;
+	}
 
 
 }
