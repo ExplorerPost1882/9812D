@@ -1,4 +1,5 @@
 #pragma config(Motor,  port1,           left,          tmotorVex393_HBridge, openLoop, reversed)
+#pragma config(Motor,  port7,           Hook,          tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           openclose,     tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port9,           touchclaw,     tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port10,          right,         tmotorVex393_HBridge, openLoop)
@@ -17,55 +18,12 @@ void pre_auton()
 //****************************************autonomus****************************************
 void doAutonomous()
 {
-	    if (vexRT[Btn7L])
-		//go forward for 1.6 seconds
-			motor[right] = 127;
-			motor[left] = 127;
-			wait1Msec(1600);
-			motor[right] = 0;
-			motor[left] = 0;
-			//rotate 90 degrees to the left
-			motor[right] = 127;
-			motor[left] = -127;
-			wait1Msec(0694);
-			motor[right] = 0;
-			motor[left] = 0;
-			//go forward for 1.1 seconds
-			motor[right] = 127;
-			motor[left] = 127;
-			wait1Msec(1100);
-			motor[right] = 0;
-			motor[left] = 0;
-			//rotate right 90 deferes
-			motor[right] = -127;
-			motor[left] = 127;
-			wait1Msec(0600);
-			motor[right] = 0;
-			motor[left] = 0;
-			//go forward for 0.6 second
-			motor[left] = 127;
-			motor[right] = 127;
-			wait1Msec(600);
-			motor[right] = 0;
-			motor[left] = 0;
-			//lift arm for 1.5 seconds
-			motor[touchclaw] = 127;
-			wait1Msec(1000);
-			//close claw
-			motor[touchclaw] = -127;
-			wait1Msec(1000);
-			//stop claw
-			motor[touchclaw] = 0;
-			motor[left] = -127;
-			motor[right] = 127;
-			wait1Msec(0900);
-			motor[left] = 0;
-			motor[right] = 0;
-			motor[right] = 127;
-			motor[left] = 127;
-			wait1Msec(0100);
-			motor[right] = 0;
-			motor[left] = 0;
+	if(vexRT[Btn7R])
+	{
+		motor[right] = 127;
+		motor[left] = 127;
+		wait1Msec(3000);
+
 
 }
 
@@ -74,7 +32,7 @@ task autonomous()
 	doAutonomous();
 }
 
-//****************************************usercontrol****************************************
+//****************************************usercontrol***************************************
 task usercontrol()
 {
 	while (true)
@@ -107,15 +65,24 @@ task usercontrol()
 		if(vexRT[Btn6UXmtr2])
 		{
 			motor[openclose] = 127;
-	  }
-			else if(vexRT[Btn6DXmtr2])
-	  {
-	  	motor[openclose] = -127;
-	  }
-	    else
-	  {
-	    motor[openclose] = 0;
+		}
+		else if(vexRT[Btn6DXmtr2])
+		{
+			motor[openclose] = -127;
+		}
+		else
+		{
+			motor[openclose] = 0;
+			//Buttons to hook for hang hook
+			if(vexRT[Btn7UXmtr2])
+			{
+				motor[Hook] = 127;
+			}
+			  wait1Msec(1000);
+			{
+				motor[Hook] = 0;
+		  }
 		}
 	}
 }
-			//fun code of the day "log.output("hi");" what will this code do and what langwedge
+	//fun code of the day "log.output("hi");" what will this code do and what langwedge
