@@ -18,7 +18,7 @@ void pre_auton()
 //****************************************autonomus****************************************
 void doAutonomous()
 {
-	if(vexRT[Btn7R])
+	if(vexRT[Btn7L])
 	{
  //go forward for three seconds
 		motor[right] = 127;
@@ -57,7 +57,30 @@ void doAutonomous()
  //use gear rail
 		motor[Hook] = 127;
 		wait1Msec(2000);
-		motor[Hook] = 0;
+		motor[openclose] = 0;
+ //reverse gear rail
+		motor[openclose] = -127;
+		wait1Msec(2000);
+		motor[openclose] = 0;
+ //turn left 90 degrees
+		motor[right] = 127;
+		motor[left] = 0;
+		wait1Msec(1000);
+		motor[right] = 0;
+		motor[left] = 0;
+ //go forward
+		motor[right] = 127;
+		motor[left] = 127;
+		wait1Msec(0500);
+		motor[right] = 0;
+		motor[left] = 0;
+ //turn right
+		motor[right] = 0;
+		motor[left] = 127;
+		wait1Msec(1000);
+		motor[right] = 0;
+		motor[left] = 0;
+ //
 	}
 
 
@@ -84,11 +107,11 @@ task usercontrol()
 		motor[left] = vexRT[Ch3];
 
 		//Buttons to move arm
-		if(vexRT[Btn5UXmtr2])
+		if(vexRT[Btn5UXmtr2]==1)
 		{
 			motor[touchclaw] = 120;
 		}
-		else if(vexRT[Btn5DXmtr2])
+		else if(vexRT[Btn5DXmtr2]==1)
 		{
 			motor[touchclaw] = -80;
 		}
@@ -98,11 +121,11 @@ task usercontrol()
 		}
 
 		//Buttons to open / close claw
-		if(vexRT[Btn6UXmtr2])
+		if(vexRT[Btn6UXmtr2]==1)
 		{
 			motor[openclose] = 127;
 		}
-		else if(vexRT[Btn6DXmtr2])
+		else if(vexRT[Btn6DXmtr2]==1)
 		{
 			motor[openclose] = -127;
 		}
@@ -110,12 +133,12 @@ task usercontrol()
 		{
 			motor[openclose] = 0;
 			//Buttons to hook for hang hook
-			if(vexRT[Btn7UXmtr2])
+			if(vexRT[Btn7UXmtr2]==1)
 			{
-				motor[Hook] = 127;
-			}
-			  wait1Msec(1000);
-			{
+				motor[Hook] = -127;
+
+			  wait1Msec(0500);
+
 				motor[Hook] = 0;
 		  }
 		}
