@@ -55,7 +55,7 @@ void doAutonomous()
 		wait1Msec(2000);
 		motor[touchclaw] = 0;
  //use gear rail
-		motor[Hook] = 127;
+		motor[openclose] = 127;
 		wait1Msec(2000);
 		motor[openclose] = 0;
  //reverse gear rail
