@@ -23,13 +23,13 @@ void doAutonomous()
  //go forward for three seconds
 		motor[right] = 127;
 		motor[left] = 127;
-		wait1Msec(3000);
+		wait1Msec(0700);
 		motor[right] = 0;
 		motor[left] = 0;
  //go left 90 degrees
 		motor[right] = 127;
 		motor[left] = 0;
-		wait1Msec(2500);
+		wait1Msec(0900);
 		motor[right] = 0;
 		motor[left] = 0;
  //go forward
@@ -80,6 +80,20 @@ void doAutonomous()
 		wait1Msec(1000);
 		motor[right] = 0;
 		motor[left] = 0;
+ //move backward
+	 motor[right] = -127;
+	 motor[left] = -127;
+	 wait1Msec(0200);
+	 motor[right] = 0;
+	 motor[left] = 0;
+ //lift arm
+	 motor[touchclaw] = 0;
+	 wait1Msec(0500);
+	 motor[touchclaw] = 0;
+ //arm going down
+	 motor[touchclaw] = -127;
+	 wait1Msec(0500);
+	 motor[touchclaw] = 0;
  //
 	}
 
