@@ -18,8 +18,6 @@ void pre_auton()
 //****************************************autonomus****************************************
 void doAutonomous()
 {
-	if(vexRT[Btn7L])
-	{
  //go forward for three seconds
 		motor[right] = 127;
 		motor[left] = 127;
@@ -95,7 +93,6 @@ void doAutonomous()
 	 wait1Msec(0500);
 	 motor[touchclaw] = 0;
  //
-	}
 
 
 }
@@ -146,15 +143,14 @@ task usercontrol()
 		else
 		{
 			motor[openclose] = 0;
-			//Buttons to hook for hang hook
-			if(vexRT[Btn7UXmtr2]==1)
-			{
-				motor[Hook] = -127;
-
-			  wait1Msec(0500);
-
-				motor[Hook] = 0;
-		  }
+		}
+		
+		//Buttons to hook for hang hook
+		if(vexRT[Btn7UXmtr2]==1)
+		{
+			motor[Hook] = -127;
+			wait1Msec(0500);
+			motor[Hook] = 0;
 		}
 	}
 }
