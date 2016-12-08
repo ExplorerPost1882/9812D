@@ -19,9 +19,12 @@ void pre_auton()
 //****************************************autonomus****************************************
 void doAutonomous()
 {
+//<<<<<<< HEAD
 
 
- //go forward for three seconds
+//=======
+//>>>>>>> origin/master
+//go forward for three seconds
 		motor[right] = 127;
 		motor[left] = 127;
 		wait1Msec(0700);
@@ -192,15 +195,27 @@ task usercontrol()
 		{
 			motor[openclose] = 0;
 		}
+//<<<<<<< HEAD
+//=======
+
+//>>>>>>> origin/master
 		//Buttons to hook for hang hook
 		if(vexRT[Btn7UXmtr2]==1)
 		{
 			motor[Hook] = -127;
+//<<<<<<< HEAD
 
 		  wait1Msec(0500);
 
 			motor[Hook] = 0;
 	  }
+//=======
+			wait1Msec(0500);
+			motor[Hook] = 0;
+		}
+
+
+//>>>>>>> origin/master
 	}
-}
+//}
 	//fun code of the day "log.output("hi");" what will this code do and what langwedge
