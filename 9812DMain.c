@@ -14,137 +14,64 @@ void pre_auton()
 	bStopTasksBetweenModes = true;
 }
 //do not mess with anthing above this!
-//ok i wont!
-
-//****************************************autonomus****************************************
-void doAutonomous()
-{
-//<<<<<<< HEAD
-
-
-//=======
-//>>>>>>> origin/master
-//go forward for three seconds
-		motor[right] = 127;
-		motor[left] = 127;
-		wait1Msec(0700);
-		motor[right] = 0;
-		motor[left] = 0;
- //go left 90 degrees
-		motor[right] = 127;
-		motor[left] = 0;
-		wait1Msec(0900);
-		motor[right] = 0;
-		motor[left] = 0;
- //go forward
-		motor[right] = 127;
-		motor[left] = 127;
-		wait1Msec(0500);
-		motor[right] = 0;
-		motor[left] = 0;
- //go right 90 degrees
-		motor[right] = 0;
-		motor[left] = 127;
-		wait1Msec(0500);
-		motor[right] = 0;
-		motor[left] = 0;
- //go forward
-		motor[right] = 127;
-		motor[left] = 127;
-		wait1Msec(0400);
-		motor[right] = 127;
-		motor[left] = 127;
- //lift arm
-		motor[arm] = 127;
-		wait1Msec(2000);
-		motor[arm] = 0;
- //use gear rail
-		motor[openclose] = 127;
-		wait1Msec(2000);
-		motor[openclose] = 0;
- //reverse gear rail
-		motor[openclose] = -127;
-		wait1Msec(2000);
-		motor[openclose] = 0;
- //turn left 90 degrees
-		motor[right] = 127;
-		motor[left] = 0;
-		wait1Msec(1000);
-		motor[right] = 0;
-		motor[left] = 0;
- //go forward
-		motor[right] = 127;
-		motor[left] = 127;
-		wait1Msec(0500);
-		motor[right] = 0;
-		motor[left] = 0;
- //turn right
-		motor[right] = 0;
-		motor[left] = 127;
-		wait1Msec(1000);
-		motor[right] = 0;
-		motor[left] = 0;
- //move backward
-	 motor[right] = -127;
-	 motor[left] = -127;
-	 wait1Msec(0200);
-	 motor[right] = 0;
-	 motor[left] = 0;
- //lift arm
-	 motor[arm] = 0;
-	 wait1Msec(0500);
-	 motor[arm] = 0;
- //arm going down
-	 motor[arm] = -127;
-	 wait1Msec(0500);
-	 motor[arm] = 0;
- //turn left
-	 motor[right] = 127;
-	 motor[left] = 0;
-	 wait1Msec(0800);
-	 motor[right] = 0;
-	 motor[left] = 0;
- //lift arm
-	 motor[arm] = 127;
-	 wait1Msec(0700);
-	 motor[arm] = 0;
- //go forward
-	 motor[right] = 127;
-	 motor[left] = 127;
-	 wait1Msec(0500);
-	 motor[right] = 0;
-	 motor[left] = 0;
- //go backward
-	 motor[right] = -127;
-	 motor[left] = -127;
-	 wait1Msec(0500);
-	 motor[right] = 0;
-	 motor[left] = 0;
- //drop the arm
-	 motor[arm] = 127;
-	 wait1Msec(0700);
-	 motor[arm] = 0;
- //turn 180 degrees
-	 motor[right] = 127;
-	 motor[left] = 0;
-	 wait1Msec(1800);
-	 motor[right] = 0;
-	 motor[left] = 0;
- //
-
-
-}
+/*ok i wont!*/
 void encoderforwards (float howMany)
 {
 	SensorValue[encoder] = 0;
 	while(SensorValue[encoder] < howMany*90)
-  {
-    //...Move Forward
-    motor[right] = 127;
-    motor[left] = 127;
-  }
-    motor[right] = 0;
-    motor[left] = 0;
+	{
+		//...Move Forward
+		motor[right] = 127;
+		motor[left] = 127;
+	}
+	motor[right] = 0;
+	motor[left] = 0;
+
+}
+void encoderright (float howMany)
+{
+	SensorValue[encoder] = 0;
+	while(SensorValue[encoder] < howMany*90)
+	{
+		//...Move Forward
+		motor[right] = -127;
+		motor[left] = 127;
+	}
+	motor[right] = 0;
+	motor[left] = 0;
+
+}
+void encoderleft (float howMany)
+{
+	SensorValue[encoder] = 0;
+	while(SensorValue[encoder] > howMany*-90)
+	{
+		//...Move Forward
+		motor[right] = 127;
+		motor[left] = -127;
+	}
+	motor[right] = 0;
+	motor[left] = 0;
+
+}
+
+//****************************************autonomus****************************************
+void doAutonomous()
+{
+	//go forward
+  motor[right] = 127;
+  motor[left] = 127;
+  wait1Msec(0880);
+  motor[right] = 0;
+  motor[left] = 0;
+  //turn right
+  motor[right] = -127;
+  motor[left] = 127;
+  wait1Msec(0800);
+  motor[right] = 0;
+  motor[left] = 0;
+  //
+
 
 }
 
@@ -195,27 +122,26 @@ task usercontrol()
 		{
 			motor[openclose] = 0;
 		}
-//<<<<<<< HEAD
-//=======
-
-//>>>>>>> origin/master
 		//Buttons to hook for hang hook
 		if(vexRT[Btn7UXmtr2]==1)
 		{
 			motor[Hook] = -127;
-//<<<<<<< HEAD
 
-		  wait1Msec(0500);
-
-			motor[Hook] = 0;
-	  }
-//=======
 			wait1Msec(0500);
+
 			motor[Hook] = 0;
 		}
+    //Buttons to UNhook for hang hook
+		if(vexRT[Btn7DXmtr2]==1)
+	  {
+	  	motor[Hook] = 127;
 
+	  	wait1Msec(0500);
 
-//>>>>>>> origin/master
+	  	motor[Hook] = 0;
+	  }
 	}
-//}
-	//fun code of the day "log.output("hi");" what will this code do and what langwedge
+
+
+
+}
