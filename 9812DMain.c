@@ -61,16 +61,45 @@ void doAutonomous()
 	//go forward
   motor[right] = 127;
   motor[left] = 127;
-  wait1Msec(0880);
+  wait1Msec(1000);
   motor[right] = 0;
   motor[left] = 0;
   //turn right
   motor[right] = -127;
   motor[left] = 127;
-  wait1Msec(0800);
+  wait1Msec(1100);
   motor[right] = 0;
   motor[left] = 0;
-  //
+  //move forward
+  motor[right] = 127;
+  motor[left] = 127;
+  wait1Msec(0300);
+  motor[right] = 0;
+  motor[left] = 0;
+  //move backwards
+  motor[right] = -127;
+  motor[left] =  -127;
+  wait1Msec(0900);
+  motor[right] = 0;
+  motor[left] = 0;
+  //pull arm up
+  motor[openclose] = 127;
+  wait1Msec(1000);
+  motor[arm] = 127;
+  wait1Msec(0900);
+  motor[openclose] = 0;
+  motor[arm] = 0;
+  //pull itself up
+  motor[openclose] = -127;
+  motor[arm] = -127;
+  wait1Msec(1000);
+  motor[Hook] = -127;
+  wait1Msec(0800);
+  motor[Hook] = 0;
+  motor[openclose] = 0;
+  motor[arm] = 0;
+
+
 
 
 }
