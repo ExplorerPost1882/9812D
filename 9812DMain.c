@@ -1,4 +1,5 @@
-#pragma config(Sensor, dgtl1,  encoder,        sensorQuadEncoder)
+#pragma config(Sensor, in3,    armpot,         sensorPotentiometer)
+#pragma config(Sensor, dgtl10, encoder,        sensorRotation)
 #pragma config(Motor,  port1,           left,          tmotorVex393_HBridge, openLoop, reversed)
 #pragma config(Motor,  port7,           Hook,          tmotorVex393_MC29, openLoop)
 #pragma config(Motor,  port8,           openclose,     tmotorVex393_MC29, openLoop)
@@ -44,7 +45,7 @@ void encoderright (float howMany)
 void encoderleft (float howMany)
 {
 	SensorValue[encoder] = 0;
-	while(SensorValue[encoder] > howMany*-90)
+	while(SensorValue[encoder] < howMany*90)
 	{
 		//...Move Forward
 		motor[right] = 127;
@@ -54,50 +55,45 @@ void encoderleft (float howMany)
 	motor[left] = 0;
 
 }
+void encoderbackward (float howMany)
+{
+	SensorValue[encoder] = 0;
+	while(SensorValue[encoder] < howMany*90)
+	{
+		//...Move Backwards
+		motor[right] = -127;
+		motor[left] = -127;
+	}
+	motor[right] = 0;
+	motor[left] = 0;
 
+}
+
+void raisetolift ()
+{
+	while(SensorValue[armpot] < 210)
+	{
+		//...Move Backwards
+		motor[arm] = 127;
+	}
+	motor[arm] = 0;
+
+}
 //****************************************autonomus****************************************
 void doAutonomous()
 {
 	//go forward
-  motor[right] = 127;
-  motor[left] = 127;
-  wait1Msec(1000);
-  motor[right] = 0;
-  motor[left] = 0;
-  //turn right
-  motor[right] = 127;
-  motor[left] = -127;
-  wait1Msec(1236);
-  motor[right] = 0;
-  motor[left] = 0;
+  encoderforwards(3);
+  //turn left
+  encoderleft(2);
   //move forward
-  motor[right] = 127;
-  motor[left] = 127;
-  wait1Msec(0300);
-  motor[right] = 0;
-  motor[left] = 0;
+  encoderforwards(1);
   //move backwards
-  motor[right] = -127;
-  motor[left] =  -127;
-  wait1Msec(0900);
-  motor[right] = 0;
-  motor[left] = 0;
+  encoderbackward(2);
   //pull arm up
-  motor[openclose] = 127;
-  wait1Msec(1000);
-  motor[arm] = 127;
-  wait1Msec(0900);
-  motor[openclose] = 0;
-  motor[arm] = 0;
+  raisetolift();
   //pull itself up
-  motor[openclose] = -127;
-  motor[arm] = -127;
-  wait1Msec(1000);
-  motor[Hook] = -127;
-  wait1Msec(0800);
-  motor[Hook] = 0;
-  motor[openclose] = 0;
-  motor[arm] = 0;
+
 
 
 
