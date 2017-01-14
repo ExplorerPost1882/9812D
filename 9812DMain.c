@@ -65,9 +65,9 @@ void doAutonomous()
   motor[right] = 0;
   motor[left] = 0;
   //turn right
-  motor[right] = -127;
-  motor[left] = 127;
-  wait1Msec(1100);
+  motor[right] = 127;
+  motor[left] = -127;
+  wait1Msec(1236);
   motor[right] = 0;
   motor[left] = 0;
   //move forward
