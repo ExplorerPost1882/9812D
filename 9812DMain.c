@@ -98,18 +98,23 @@ void slidetouch ()
 	{
 		motor[openclose] = 127;
 	}
+	// DON"T FORGET TO TURN THE MOTOR OFF HERE
 }
+//???????????????????????????
+//WHAT IS THIS FUNCTION FOR? 
 void unslidetouch (){
 	while (SensorValue(slidingtouch) ==1)
 	{
 		motor[openclose] = 0;
 	}
 }
+//??????????????????????????
 void backwardtouch (){
-	while (SensorValue(doubletouch) == 1)
+	while (SensorValue(doubletouch) == 1/*I THINK YOU MEANT TO CHECK FOR 0 HERE*/)
 	{
-		motor[openclose] = 0;
+		motor[openclose] = 0;//I THINK YOU MEANT TO TURN THE MOTOR ON HERE
 	}
+	//DON'T FORGET TO TURN THE MOTOR OFF HERE
 }
 //****************************************autonomus****************************************
 void doAutonomous()
