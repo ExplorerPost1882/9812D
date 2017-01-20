@@ -1,6 +1,6 @@
+#pragma config(Sensor, in2,    hook,           sensorPotentiometer)
 #pragma config(Sensor, in3,    armpot,         sensorPotentiometer)
-#pragma config(Sensor, dgtl8,  slidingtouch,   sensorTouch)
-#pragma config(Sensor, dgtl9,  doubletouch,    sensorTouch)
+#pragma config(Sensor, dgtl9,  encodertwo,     sensorRotation)
 #pragma config(Sensor, dgtl10, encoder,        sensorRotation)
 #pragma config(Motor,  port1,           left,          tmotorVex393_HBridge, openLoop, reversed)
 #pragma config(Motor,  port7,           Hook,          tmotorVex393_MC29, openLoop)
@@ -91,30 +91,31 @@ void lowertolift ()
 	}
 	motor[arm] = 0;
 }
-
-void slidetouch ()
+void armout ()
 {
-	while (SensorValue(slidingtouch) ==0)
-	{
-		motor[openclose] = 127;
-	}
-	  motor[openclose] = 0;
+	while(SensorValue[encodertwo] < 78)
+  {
+  	motor[openclose] = 127;
+  }
+  motor[openclose] = 0;
 }
-
-void unslidetouch (){
-	while (SensorValue(slidingtouch) ==1)
-	{
-		motor[openclose] = -127;
-	}
-	  motor[openclose] = 0;
+void armin ()
+{
+	while(SensorValue[encodertwo] > 78)
+  {
+  	motor[openclose] = -127;
+  }
+  motor[openclose] = 0;
 }
-
-void backwardtouch (){
-	while (SensorValue(doubletouch) == 0)
+void armhook ()
+{
+	while(SensorValue[hook] < 210)
 	{
-		motor[openclose] = -127;
+		//...Move Backwards
+		motor[Hook] = 127;
 	}
-	  motor[openclose] = 0;
+	motor[Hook] = 0;
+
 }
 //****************************************autonomus****************************************
 void doAutonomous()
@@ -130,10 +131,11 @@ void doAutonomous()
   //pull arm up
   raisetolift();
   //pull itself up
-  slidetouch();
+  armout();
+  armin();
   lowertolift();
-  unslidetouch();
-  backwardtouch();
+  armhook();
+
 
 
 
