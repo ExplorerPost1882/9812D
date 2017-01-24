@@ -16,14 +16,11 @@ void pre_auton()
 {
 	bStopTasksBetweenModes = true;
 }
-//do not mess with anthing above this!
-/*ok i wont!*/
 void encoderforwards (float howMany)
 {
 	SensorValue[encoder] = 0;
 	while(SensorValue[encoder] < howMany*90)
 	{
-		//...Move Forward
 		motor[right] = 127;
 		motor[left] = 127;
 	}
@@ -37,7 +34,6 @@ void encoderright (float howMany)
 	SensorValue[encoder] = 0;
 	while(SensorValue[encoder] < howMany*90)
 	{
-		//...Move Forward
 		motor[right] = -127;
 		motor[left] = 127;
 	}
@@ -50,7 +46,6 @@ void encoderleft (float howMany)
 	SensorValue[encoder] = 0;
 	while(SensorValue[encoder] < howMany*90)
 	{
-		//...Move Forward
 		motor[right] = 127;
 		motor[left] = -127;
 	}
@@ -63,7 +58,6 @@ void encoderbackward (float howMany)
 	SensorValue[encoder] = 0;
 	while(SensorValue[encoder] < howMany*90)
 	{
-		//...Move Backwards
 		motor[right] = -127;
 		motor[left] = -127;
 	}
@@ -76,7 +70,6 @@ void raisetolift ()
 {
 	while(SensorValue[armpot] < 210)
 	{
-		//...Move Backwards
 		motor[arm] = 127;
 	}
 	motor[arm] = 0;
@@ -86,7 +79,6 @@ void lowertolift ()
 {
 	while(SensorValue[armpot] > 78)
 	{
-		//...Move Backwards
 		motor[arm] = -127;
 	}
 	motor[arm] = 0;
@@ -111,7 +103,6 @@ void armhook ()
 {
 	while(SensorValue[hook] < 210)
 	{
-		//...Move Backwards
 		motor[Hook] = 127;
 	}
 	motor[Hook] = 0;
@@ -123,7 +114,7 @@ void doAutonomous()
 	//go forward
   encoderforwards(3);
   //turn left
-  encoderleft(2);
+  encoderright(3);
   //move forward
   encoderforwards(1);
   //move backwards
