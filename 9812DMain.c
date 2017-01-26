@@ -85,23 +85,28 @@ void lowertolift ()
 }
 void armout ()
 {
+	SensorValue[encodertwo]=0;
 	while(SensorValue[encodertwo] < 78)
   {
   	motor[openclose] = 127;
   }
   motor[openclose] = 0;
 }
+
 void armin ()
 {
-	while(SensorValue[encodertwo] > 78)
+  SensorValue[encodertwo]=0;
+	while(SensorValue[encodertwo] > 180)
   {
   	motor[openclose] = -127;
   }
   motor[openclose] = 0;
 }
+
 void armhook ()
 {
-	while(SensorValue[hook] < 210)
+	SensorValue[hook]=0;
+	while(SensorValue[hook] < 45)
 	{
 		motor[Hook] = 127;
 	}
@@ -114,7 +119,7 @@ void doAutonomous()
 	//go forward
   encoderforwards(3);
   //turn left
-  encoderright(3);
+  encoderleft(2.5);
   //move forward
   encoderforwards(1);
   //move backwards
@@ -198,7 +203,7 @@ task usercontrol()
 	  {
 	  	motor[Hook] = 127;
 
-	  	wait1Msec(0500);
+	  	wait1Msec(0250);
 
 	  	motor[Hook] = 0;
 	  }
