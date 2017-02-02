@@ -117,21 +117,13 @@ void armhook ()
 void doAutonomous()
 {
 	//go forward
-  encoderforwards(3);
+  encoderforwards(2.5);
   //turn left
-  encoderleft(2.5);
-  //move forward
-  encoderforwards(1);
-  //move backwards
-  encoderbackward(2);
-  //pull arm up
-  raisetolift();
-  //pull itself up
-  armout();
-  armin();
-  lowertolift();
-  armhook();
-
+  encoderleft(1);
+  //go forward
+  encoderforwards(2);
+  //go backward
+  encoderbackward(3);
 
 
 
