@@ -124,4 +124,3 @@ task usercontrol()
 		motor[openclose] = 0;
 	}
 }
-
